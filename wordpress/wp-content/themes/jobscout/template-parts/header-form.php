@@ -26,7 +26,7 @@ if( $post_slug ){
 
       <div class="search_keywords">
         <label for="search_keywords"><?php esc_html_e( 'Keywords', 'jobscout' ); ?></label>
-        <input type="text" id="search_keywords" name="search_keywords" placeholder="<?php esc_attr_e( 'Keywords', 'jobscout' ); ?>">
+        <input type="text" id="search_keywords" name="search_keywords" placeholder="<?php esc_attr_e( 'Nhập công việc, công ty,...', 'jobscout' ); ?>">
       </div>
 
       <div class="search_location">
@@ -74,7 +74,7 @@ if( $post_slug ){
       <?php } ?>
       
       <div class="search_submit">
-        <input type="submit" value="<?php esc_attr_e( 'Search', 'jobscout'); ?>" />
+        <input type="submit" value="<?php esc_attr_e( 'Tìm kiếm', 'jobscout'); ?>" />
       </div>
 
     </div>
