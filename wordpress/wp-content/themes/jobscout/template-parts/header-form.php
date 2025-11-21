@@ -21,7 +21,7 @@ if( $post_slug ){
 
 <div class="job_listings">
 
-  <form class="jobscout_job_filters" method="GET" action="<?php echo esc_url( $action_page ) ?>">
+  <form class="jobscout_job_filters" method="GET" action="<?php echo esc_url( home_url( '/jobs' ) ); ?>">
     <div class="search_jobs">
 
       <div class="search_keywords">
@@ -31,7 +31,34 @@ if( $post_slug ){
 
       <div class="search_location">
         <label for="search_location"><?php esc_html_e( 'Location', 'jobscout' ); ?></label>
-        <input type="text"  id="search_location" name="search_location" placeholder="<?php esc_attr_e( 'Location', 'jobscout' ); ?>">
+    
+    <?php
+    global $wpdb;
+    $table = $wpdb->prefix . 'postmeta';
+    $sql = "SELECT DISTINCT SUBSTRING_INDEX(meta_value, ',', -1) as location FROM {$table} WHERE meta_key LIKE '%location%' AND meta_value != '' ORDER BY location ASC";
+    
+    // Thực thi query
+    $data = $wpdb->get_results($sql);
+    ?>
+
+    <select id="search_location" name="search_location" class="search-location-select">
+        <option value="">Chọn khu vực</option>
+        
+        <?php 
+        // Kiểm tra xem có dữ liệu không rồi mới lặp
+        if ( $data ) {
+            foreach ($data as $value) : 
+                // Bỏ qua nếu location rỗng
+                if (empty($value->location)) continue; 
+        ?>
+                <option value="<?php echo esc_attr( trim($value->location) ); ?>">
+                    <?php echo esc_html( trim($value->location) ); ?>
+                </option>
+        <?php 
+            endforeach;
+        } 
+        ?>
+    </select>
       </div>
       
       <?php if( $ed_job_category ){ ?>
