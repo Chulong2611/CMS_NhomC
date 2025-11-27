@@ -13,7 +13,13 @@ if ( 'posts' == get_option( 'show_on_front' ) ) { //Show Static Blog Page
     get_header();
     //If any one section are enabled then show custom home page.
     foreach( $home_sections as $section ){
+        if ( $section === 'client' ) continue; //Skip client section
         get_template_part( 'sections/' . esc_attr( $section ) );  
+
+        if ( $section === 'blog' ) {
+            // Gọi file newsletter.php nằm trong thư mục sections
+            get_template_part( 'sections/newsletter' ); 
+        }
     }
     get_footer();
 }else {
