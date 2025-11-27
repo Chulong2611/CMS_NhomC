@@ -94,7 +94,7 @@ add_filter( 'gettext', function( $translated_text, $text, $domain ) {
         case 'Load more listings':
         case '+ Load More Listings':
         case 'Load More Listings':
-            $translated_text = 'VIEW MORE JOBS';
+            $translated_text = 'XEM THÊM';
             break;
     }
     return $translated_text;
