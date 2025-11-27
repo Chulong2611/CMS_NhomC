@@ -78,7 +78,9 @@ get_header();
     </main>
 </div>
 
-<?php get_template_part( 'sections', 'newsletter' ); ?>
+<div class="news-letter">
+    <?php get_template_part( 'sections/newsletter' ); ?>
+</div>
 
 <?php get_footer(); ?>
 
