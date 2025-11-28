@@ -24,13 +24,24 @@ if( $post_slug ){
   <form class="jobscout_job_filters" method="GET" action="<?php echo esc_url( home_url( '/jobs' ) ); ?>">
     <div class="search_jobs">
 
-      <div class="search_keywords">
+      <div class="search_keywords input-with-icon">
         <label for="search_keywords"><?php esc_html_e( 'Keywords', 'jobscout' ); ?></label>
+        <span class="search-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="#e67e22" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+            </svg>
+        </span>
         <input type="text" id="search_keywords" name="search_keywords" placeholder="<?php esc_attr_e( 'Nhập công việc, công ty,...', 'jobscout' ); ?>">
       </div>
 
-      <div class="search_location">
+      <div class="search_location input-with-icon">
         <label for="search_location"><?php esc_html_e( 'Location', 'jobscout' ); ?></label>
+        <span class="search-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="#e67e22" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+              <path stroke-linecap="round" stroke-linejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+            </svg>
+        </span>
     
     <?php
     global $wpdb;
