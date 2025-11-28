@@ -46,28 +46,49 @@ if( $post_slug ){
     <?php
     global $wpdb;
     $table = $wpdb->prefix . 'postmeta';
-    $sql = "SELECT DISTINCT SUBSTRING_INDEX(meta_value, ',', -1) as location FROM {$table} WHERE meta_key LIKE '%location%' AND meta_value != '' ORDER BY location ASC";
     
-    // Thực thi query
+    // 1. QUERY SQL (Đã thêm điều kiện loại bỏ UK)
+    $sql = "SELECT DISTINCT SUBSTRING_INDEX(meta_value, ',', -1) as location 
+            FROM {$table} 
+            WHERE meta_key LIKE '%location%' 
+            AND meta_value != '' 
+            AND meta_value NOT LIKE '%UK%'"; // <-- DÒNG NÀY ĐỂ LOẠI BỎ 'UK'
+            
     $data = $wpdb->get_results($sql);
+    
+    // 2. Xử lý dữ liệu bằng PHP (Để sạch đẹp và sắp xếp A-Z chuẩn)
+    $location_list = array();
+    if ( $data ) {
+        foreach ( $data as $value ) {
+            // Cắt khoảng trắng thừa
+            $clean_loc = trim( $value->location );
+            
+            // Kiểm tra kỹ lại lần nữa (đề phòng UK có khoảng trắng ' UK ')
+            if ( ! empty( $clean_loc ) && $clean_loc !== 'UK' ) {
+                $location_list[] = $clean_loc;
+            }
+        }
+    }
+    
+    // 3. Loại bỏ trùng lặp và Sắp xếp A-Z (Tiếng Việt)
+    $location_list = array_unique( $location_list ); 
+    usort($location_list, function($a, $b) {
+        return strcmp( remove_accents($a), remove_accents($b) );
+    });
     ?>
 
     <select id="search_location" name="search_location" class="search-location-select">
         <option value="">Chọn khu vực</option>
         
         <?php 
-        // Kiểm tra xem có dữ liệu không rồi mới lặp
-        if ( $data ) {
-            foreach ($data as $value) : 
-                // Bỏ qua nếu location rỗng
-                if (empty($value->location)) continue; 
+        // 4. Hiển thị danh sách
+        foreach ( $location_list as $loc ) : 
         ?>
-                <option value="<?php echo esc_attr( trim($value->location) ); ?>">
-                    <?php echo esc_html( trim($value->location) ); ?>
-                </option>
+            <option value="<?php echo esc_attr( $loc ); ?>">
+                <?php echo esc_html( $loc ); ?>
+            </option>
         <?php 
-            endforeach;
-        } 
+        endforeach; 
         ?>
     </select>
       </div>
