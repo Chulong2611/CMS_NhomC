@@ -9,7 +9,7 @@ get_header();
 <div class="custom-news-banner" style="background-image: url('https://4kwallpapers.com/images/walls/thumbs_3t/22326.jpg');">
     <div class="overlay"></div>
     <div class="container">
-        <h1 class="page-title">PDS NEWS</h1>
+        <h1 class="page-title">TIN TỨC - BÀI VIẾT</h1>
     </div>
 </div>
 
@@ -17,7 +17,7 @@ get_header();
     <main id="main" class="site-main container">
         
         <div class="section-header" style="text-align: center; margin-bottom: 40px;">
-            <h2 class="section-title" style="font-size: 24px; font-weight: bold; text-transform: uppercase;">NEWEST BLOG ENTRIES</h2>
+            <h2 class="section-title" style="font-size: 24px; font-weight: bold; text-transform: uppercase;">TIN TỨC - BÀI VIẾT MỚI NHẤT</h2>
         </div>
 
         <div class="blog-items-wrapper">
@@ -52,7 +52,7 @@ get_header();
                             <div class="entry-summary">
                                 <?php echo wp_trim_words( get_the_excerpt(), 15, '...' ); ?>
                             </div>
-                            <a href="<?php the_permalink(); ?>" class="read-more-link">Read More</a>
+                            <a href="<?php the_permalink(); ?>" class="read-more-link">Xem thêm</a>
                         </div>
                     </div>
 
@@ -63,8 +63,8 @@ get_header();
                 echo '<div class="news-pagination" style="grid-column: 1 / -1; text-align: center; margin-top: 30px;">';
                 echo paginate_links( array(
                     'total' => $the_query->max_num_pages,
-                    'prev_text' => '&laquo; Prev',
-                    'next_text' => 'Next &raquo;',
+                    'prev_text' => '&laquo; Trang trước',
+                    'next_text' => 'Trang sau &raquo;',
                 ) );
                 echo '</div>';
 
