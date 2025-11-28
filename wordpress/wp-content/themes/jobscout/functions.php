@@ -86,3 +86,16 @@ if( jobscout_is_woocommerce_activated() ){
 if( jobscout_is_wp_job_manager_activated() ) :
 	require get_template_directory() . '/inc/wp-job-manager-filters.php';
 endif;
+
+/* --- ĐỔI TÊN NÚT LOAD MORE (PHƯƠNG ÁN MẠNH NHẤT) --- */
+add_filter( 'gettext', function( $translated_text, $text, $domain ) {
+    // Kiểm tra các biến thể chữ mà theme có thể dùng
+    switch ( $translated_text ) {
+        case 'Load more listings':
+        case '+ Load More Listings':
+        case 'Load More Listings':
+            $translated_text = 'XEM THÊM';
+            break;
+    }
+    return $translated_text;
+}, 20, 3 );
